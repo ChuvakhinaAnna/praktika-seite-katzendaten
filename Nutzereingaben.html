@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Nutzereingaben</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      position: relative;
+      padding-top: 70px;
+      font-family: "Google Sans Flex", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings:
+        "slnt" 0,
+        "wdth" 100,
+        "GRAD" 0,
+        "ROND" 0;
+      color: #1e1e1e;
+    }
+
+
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    label {
+      font-style: normal;
+      font-variation-settings:
+        "slnt" 0,
+        "wdth" 100,
+        "GRAD" 0,
+        "ROND" 0;
+      color: #1e1e1e;
+    }
+
+    .admin-button {
+      position: absolute;
+      display: inline-block;
+      padding: 10px 14px;
+      background-color: #3c7385;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      transition: background-color 0.2s ease;
+    }
+
+    .admin-button {
+      right: 16px;
+      top: 16px;
+    }
+
+    @media screen and (max-width: 652px) {
+      .admin-button {
+        right: 16px;
+        left: auto;
+        top: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        position: absolute;
+      }
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #142d35;
+      text-align: center;
+      padding: 15px;
+      margin-top: 0;
+      font-size: 32px;
+    }
+
+    h2 {
+      color: #295766;
+      font-size: 24px;
+    }
+
+    input[type=submit]:hover {
+      background-color: #48bebe;
+    }
+
+    #bild img {
+      width: 600px;
+      height: 900px;
+      border-radius: 10px;
+      /* border: 3px solid #111; */
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    @media screen and (max-width: 652px) {
+      h1 {
+        font-size: 26px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      #bild img {
+        width: 350px;
+        height: 500px;
+      }
+    }
+
+    details.footer-toggle {
+      width: 100%;
+      max-width: 600px;
+      margin: 5px auto 0;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    details.footer-toggle summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 600;
+      text-align: left;
+      color: #142d35;
+    }
+
+
+
+    details.footer-toggle summary::after {
+      content: "▾";
+      float: right;
+      transition: transform 0.2s ease;
+    }
+
+    details.footer-toggle[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    details.footer-toggle .footer-content {
+      padding: 0 14px 14px;
+      text-align: center;
+      color: #1e1e1e;
+    }
+
+
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #3c7385;
+      background-color: #f2f2f2;
+      text-align: center;
+      margin: auto;
+      padding: 14px;
+    }
+
+
+    
+    /* pin style (fenster admin button) */
+    #pinDialog::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    #pinDialog {
+      border: none;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 360px;
+      background: #f1f1f1;
+      box-shadow: 0 8px 24px #3c7385;
+    }
+
+    #pinDialog h3 {
+      margin: 0 0 10px;
+      color: #142d35;
+      font-size: 18px;
+    }
+
+    #pinDialog input {
+      width: 100%;
+      margin: 10px 0 14px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .pin-error {
+      display: none;
+      margin-top: 6px;
+      font-weight: 700;
+      color: #ff0000;
+    }
+    
+    #pinDialog .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    #pinDialog button {
+      flex: 1 1 0;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    #pinDialog button.primary {
+      background-color: #3c7385;
+      color: white;
+    }
+
+    #adminButton:hover {
+      background-color: #48bebe;
+    }
+
+    button#pinSubmit:hover {
+      background-color: #48bebe;
+      transition: background-color 0.2s ease;
+    }
+
+    /* pin style end */
+
+
+    /* falsche angabe feld style */
+    .input-error {
+      border: 5px solid #d9534f !important;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    label {
+      min-width: 30%;
+      margin-bottom: 5px;
+    }
+
+    input[type=text],
+    select {
+      min-width: 95%;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 14px;
+    }
+
+    textarea {
+      min-width: 99%;
+      height: 150px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      padding: 14px;
+    }
+
+    input[type=submit],
+    button#saveButton {
+      width: 100%;
+      min-height: 52px;
+      background-color: #3c7385;
+      color: white;
+      padding: 0 18px;
+      margin: 8px 0;
+      border: 1px solid #4c73;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: large;
+    }
+
+    button#saveButton:hover {
+      background-color: #48bebe;
+      transition: background-color 0.2s ease;
+    }
+
+    
+
+    #infoSuccess {
+      display: none;
+    }
+
+    @media screen and (max-width: 652px) {
+
+      label,
+      input[type=text],
+      input[type=submit],
+      select,
+      textarea {
+        flex: 100%;
+        min-width: 100%;
+      }
+
+      details.footer-toggle {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      details.footer-toggle summary {
+        padding: 10px;
+      }
+
+      details.footer-toggle .footer-content {
+        padding: 0 10px 10px;
+      }
+
+      .container {
+        max-width: 350px;
+        padding: 10px;
+      }
+
+      input[type=text],
+      select {
+        min-width: 90%;
+        padding: 10px;
+      }
+
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        height: 100px;
+        padding: 10px;
+      }
+
+      input[type=submit] {
+        width: 100%;
+        padding: 10px;
+        cursor: hand;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a id="adminButton" class="admin-button" href="#" target="_blank" rel="noopener noreferrer">Admin</a>
+  <h1>Sobald Sie Ihre Daten speichern, erscheint ein Bild.</h1>
+  <div class="container">
+    <div id="frmContainer">
+      <h2>Eingabe:</h2>
+      <form action="#" method="post" id="userinfo">
+        Name: <input type="text" id="name" name="name">
+        <br> Nachname: <input type="text" id="nachname" name="nachname">
+        <br> E-Mail: <input type="text" id="email" name="email">
+        <br> Telefon: <input type="text" id="telefon" name="telefon">
+        <button type="submit" id="saveButton">Speichern</button>
+      </form>
+    </div>
+    <div id="infoSuccess">
+      <h2 style="color:#0b7a9e; font-weight:600; margin-top:12px">Daten erfolgreich gespeichert!</h2>
+      <div class="flex-item image-box" id="bild">
+        <img src="file:///C:/Users/probeaccount/Downloads/maylo.jpg" width="345" height="460" alt="Bild">
+      </div>
+    </div>
+
+
+    <!-- Bereich zur Anzeige der zurückgegebenen Nutzer-ID nach dem Speichern -->
+    <div id="savedId" style="margin-top:12px; font-weight:600; color:#0b5968"></div>
+  </div>
+
+  <!--  admin-button pin -->
+
+  <dialog id="pinDialog" aria-labelledby="pinTitle">
+    <form id="pinForm" method="dialog">
+      <h3 id="pinTitle">Admin-PIN eingeben</h3>
+      <input id="pinInput" type="password" placeholder="PIN eingeben" aria-label="PIN" maxlength="10">
+      <div id="pinError" class="pin-error">falsche pin</div>
+      <div class="actions">
+        <button id="pinSubmit" type="submit" class="primary">Bestätigen</button>
+      </div>
+    </form>
+  </dialog> 
+
+  <details class="footer-toggle">
+    <summary>Hinweis anzeigen</summary>
+    <div class="footer-content">
+      <p> *Mit der Nutzung dieser Seite stimmen Sie der Speicherung Ihrer Daten zu. <br><br> Bitte merken Sie Ihren
+        Nutzer-ID.</p>
+    </div>
+  </details>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+      'https://fsyvdrghcmqjrkhqjtlp.supabase.co',
+      'sb_publishable_9z6rxBNsROtHlycOmfsvgQ_lsN74a6_'
+    );
+
+    const form = document.querySelector('#userinfo');
+
+    async function sendData() {
+      const formData = new FormData(form);
+      const input_data = Object.fromEntries(formData.entries());
+      const resultDiv = document.getElementById('savedId');
+
+      try {
+        const { data, error } = await supabase
+          .from('Nutzereingaben')
+          .insert([input_data])
+          .select();
+
+        if (error) {
+          console.error('Supabase-Fehler:', error);
+          if (resultDiv) resultDiv.textContent = 'Fehler beim Speichern.';
+          return;
+        }
+
+        console.log('Gespeichert:', data);
+
+        // Supabase gibt ein Array zurück; das erste Element enthält die eingefügte Zeile
+        const saved = Array.isArray(data) ? data[0] : data;
+        const id = saved && (saved.id ?? saved.ID ?? saved.user_id ?? saved.uuid);
+
+        const weiterLink = document.getElementById('weiterLink');
+        if (resultDiv) {
+          if (id) {
+            resultDiv.innerHTML = `Gespeichert. Nutzer-ID: <span style="color:#0b7a9e">${id}</span>`;
+            if (weiterLink) {
+              weiterLink.style.display = 'inline-block';
+            }
+            const frmContainer = document.getElementById('frmContainer');
+            frmContainer.style.display = 'none';
+
+            const infoSuccess = document.getElementById('infoSuccess');
+            if (infoSuccess) {
+              infoSuccess.style.display = 'block';
+            }
+            localStorage.setItem('nutzereingaben_submitted', '1');
+          } else {
+            resultDiv.textContent = 'Gespeichert (keine ID zurückgegeben).';
+            if (weiterLink) {
+              weiterLink.style.display = 'none';
+            }
+          }
+        }
+
+        // Optional: Formular zurücksetzen
+        form.reset();
+      } catch (err) {
+        console.error('Unerwarteter Fehler beim Speichern:', err);
+        const resultDiv = document.getElementById('savedId');
+        if (resultDiv) resultDiv.textContent = 'Unerwarteter Fehler.';
+      }
+    }
+
+    // prüfen vor abschicken
+    const inputs = {
+      name: document.getElementById('name'),
+      nachname: document.getElementById('nachname'),
+      email: document.getElementById('email'),
+      telefon: document.getElementById('telefon')
+    };
+
+    Object.values(inputs).forEach(i => { if (i) i.addEventListener('input', () => i.classList.remove('input-error')); });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let valid = true;
+      const nameRe = /^[A-Za-zÀ-ÖØ-öø-ÿÄÖÜäöüß\s]+$/;
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const telRe = /^\d+$/;
+
+      if (!inputs.name || !nameRe.test(inputs.name.value.trim())) { inputs.name?.classList.add('input-error'); valid = false; } else inputs.name?.classList.remove('input-error');
+      if (!inputs.nachname || !nameRe.test(inputs.nachname.value.trim())) { inputs.nachname?.classList.add('input-error'); valid = false; } else inputs.nachname?.classList.remove('input-error');
+      if (!inputs.email || !emailRe.test(inputs.email.value.trim())) { inputs.email?.classList.add('input-error'); valid = false; } else inputs.email?.classList.remove('input-error');
+      if (!inputs.telefon || !telRe.test(inputs.telefon.value.trim())) { inputs.telefon?.classList.add('input-error'); valid = false; } else inputs.telefon?.classList.remove('input-error');
+
+      if (!valid) return;
+      sendData();
+    });
+
+    const adminButton = document.getElementById('adminButton');
+    const pinDialog = document.getElementById('pinDialog');
+    const pinForm = document.getElementById('pinForm');
+    const pinInput = document.getElementById('pinInput');
+
+    if (adminButton) {
+      adminButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (pinDialog && typeof pinDialog.showModal === 'function') {
+          const pinErrorEl = document.getElementById('pinError');
+          if (pinErrorEl) pinErrorEl.style.display = 'none';
+          pinDialog.showModal();
+          pinInput?.focus();
+        }
+      });
+    }
+
+    // submit pin + error text
+    const pinErrorEl = document.getElementById('pinError');
+    pinForm?.addEventListener('submit', e => {
+      e.preventDefault();
+      if (pinInput?.value === '123') {
+        pinDialog?.close();
+        location.href = 'file:///C:/Users/probeaccount/.vscode/apps/Ausgabe.html';
+        return;
+      }
+      if (pinErrorEl) pinErrorEl.style.display = 'block';
+      if (pinInput) { pinInput.value = ''; pinInput.focus(); }
+    });
+
+  </script>
+</body>
+
+</html>
